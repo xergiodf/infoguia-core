@@ -2,7 +2,6 @@ package com.minicubic.infoguiacore.dao;
 
 import com.minicubic.infoguiacore.dto.ClientesDTO;
 import com.minicubic.infoguiacore.dto.NovedadesDTO;
-import com.minicubic.infoguiacore.dto.Response;
 import com.minicubic.infoguiacore.util.PersistenceManager;
 import java.util.List;
 import java.util.logging.Level;
