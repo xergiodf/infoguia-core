@@ -22,7 +22,7 @@ public class ClienteDao {
     public List<ClientesDTO> getClientes(ClientesDTO params) {
         try {
             LOG.info("getClientesPorSucursal... ");
-            Query query = em.createQuery("SELECT com.minicubic.infoguiaserver.dto.ClientesDTO(c.id, c.nombreCompleto, "
+            Query query = em.createQuery("SELECT com.minicubic.infoguiacore.dto.ClientesDTO(c.id, c.nombreCompleto, "
                     + "c.nombreCorto, cs.nombreSucursal, cs.direccionFisica, cs.coordenadas, cs.horarios, cs.telefono "
                     + ") FROM ClienteSucursales cs join Cliente c where c.nombre_corto like '" + params.getNombreCorto() + "%'", ClientesDTO.class);
             LOG.log(Level.INFO, "Se encontraron {0} registros", query.getResultList().size());
@@ -36,7 +36,7 @@ public class ClienteDao {
     public List<NovedadesDTO> getNovedades(){
         try {
             LOG.info("getNovedades...");
-            Query query = em.createQuery("SELECT new com.minicubic.infoguiaserver.dto.NovedadesDTO(cp.id, cp.titulo, cp.descripcionCorta, cp.dirImagen, c.id as idcliente, c.nombreCompleto, "
+            Query query = em.createQuery("SELECT new com.minicubic.infoguiacore.dto.NovedadesDTO(cp.id, cp.titulo, cp.descripcionCorta, cp.dirImagen, c.id as idcliente, c.nombreCompleto, "
                                                 + "tp.descripcion as tipo_publicacion) FROM ClientePublicaciones \n" +
                                                 "cp join cp.idCliente c join cp.tipoPublicacionesId tp " , NovedadesDTO.class);
             return query.getResultList();
