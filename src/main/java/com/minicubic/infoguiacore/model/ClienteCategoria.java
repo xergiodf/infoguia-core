@@ -41,7 +41,7 @@ public class ClienteCategoria implements Serializable {
     @Column(name = "categorias")
     private String categorias;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteCategoria")
     private Collection<Cliente> clienteCollection;
 
     public ClienteCategoria() {

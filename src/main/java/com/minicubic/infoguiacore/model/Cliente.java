@@ -62,13 +62,12 @@ public class Cliente implements Serializable {
     @Column(name = "nombre_corto")
     private String nombreCorto;
     
-    @Lob
     @Column(name = "description_completa", columnDefinition = "text")
     private String descriptionCompleta;
     
     @Column(name = "descripcion_corta")
     private String descripcionCorta;
-    
+     
     @Basic(optional = false)
     @Column(name = "fecha_alta")
     @Temporal(TemporalType.TIMESTAMP)
@@ -80,7 +79,7 @@ public class Cliente implements Serializable {
     
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ClienteCategoria idCategoria;
+    private ClienteCategoria clienteCategoria;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private Collection<Usuario> usuarioCollection;
@@ -154,12 +153,12 @@ public class Cliente implements Serializable {
         this.fechaInicio = fechaInicio;
     }
 
-    public ClienteCategoria getIdCategoria() {
-        return idCategoria;
+    public ClienteCategoria getClienteCategoria() {
+        return clienteCategoria;
     }
 
-    public void setIdCategoria(ClienteCategoria idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setClienteCategoria(ClienteCategoria clienteCategoria) {
+        this.clienteCategoria = clienteCategoria;
     }
 
     @XmlTransient
