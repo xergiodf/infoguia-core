@@ -41,7 +41,7 @@ public class EstadoUsuario implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuarioEstados")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioEstado")
     private Collection<Usuario> usuarioCollection;
 
     public EstadoUsuario() {

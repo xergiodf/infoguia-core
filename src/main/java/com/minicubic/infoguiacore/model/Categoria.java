@@ -3,15 +3,14 @@ package com.minicubic.infoguiacore.model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -19,41 +18,39 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author xergio
+ * @version 1
  */
 @Entity
-@Table(name = "cliente_categorias")
+@Table(name = "categorias")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ClienteCategoria.findAll", query = "SELECT c FROM ClienteCategoria c"),
-    @NamedQuery(name = "ClienteCategoria.findById", query = "SELECT c FROM ClienteCategoria c WHERE c.id = :id"),
-    @NamedQuery(name = "ClienteCategoria.findByCategorias", query = "SELECT c FROM ClienteCategoria c WHERE c.categorias = :categorias")})
-public class ClienteCategoria implements Serializable {
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
+    , @NamedQuery(name = "Categoria.findById", query = "SELECT c FROM Categoria c WHERE c.id = :id")
+    , @NamedQuery(name = "Categoria.findByDescripcion", query = "SELECT c FROM Categoria c WHERE c.descripcion = :descripcion")})
+public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    
     @Basic(optional = false)
-    @Column(name = "categorias")
-    private String categorias;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteCategoria")
+    @Column(name = "descripcion")
+    private String descripcion;
+    @ManyToMany(mappedBy = "categoriaCollection")
     private Collection<Cliente> clienteCollection;
 
-    public ClienteCategoria() {
+    public Categoria() {
     }
 
-    public ClienteCategoria(Integer id) {
+    public Categoria(Integer id) {
         this.id = id;
     }
 
-    public ClienteCategoria(Integer id, String categorias) {
+    public Categoria(Integer id, String descripcion) {
         this.id = id;
-        this.categorias = categorias;
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
@@ -64,12 +61,12 @@ public class ClienteCategoria implements Serializable {
         this.id = id;
     }
 
-    public String getCategorias() {
-        return categorias;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @XmlTransient
@@ -91,10 +88,10 @@ public class ClienteCategoria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClienteCategoria)) {
+        if (!(object instanceof Categoria)) {
             return false;
         }
-        ClienteCategoria other = (ClienteCategoria) object;
+        Categoria other = (Categoria) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +100,7 @@ public class ClienteCategoria implements Serializable {
 
     @Override
     public String toString() {
-        return "com.minicubic.infoguiaserver.model.ClienteCategoria[ id=" + id + " ]";
+        return "com.minicubic.infoguiacore.model.Categoria[ id=" + id + " ]";
     }
-    
+
 }

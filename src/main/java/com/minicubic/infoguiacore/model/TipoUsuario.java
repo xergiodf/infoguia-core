@@ -42,7 +42,7 @@ public class TipoUsuario implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoUsuariosId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoUsuario")
     private Collection<Usuario> usuarioCollection;
 
     public TipoUsuario() {

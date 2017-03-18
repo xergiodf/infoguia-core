@@ -1,9 +1,15 @@
 package com.minicubic.infoguiacore.dao;
 
+import com.minicubic.infoguiacore.util.converter.UsuarioConverter;
+import com.minicubic.infoguiacore.dto.UsuarioDto;
 import com.minicubic.infoguiacore.model.TipoUsuario;
 import com.minicubic.infoguiacore.model.Usuario;
+import com.minicubic.infoguiacore.util.Constants;
 import com.minicubic.infoguiacore.util.PersistenceManager;
+import com.minicubic.infoguiacore.util.Util;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,34 +21,111 @@ import javax.persistence.NoResultException;
  */
 public class UsuarioDao {
 
+    private final UsuarioConverter converter = new UsuarioConverter();
     private final EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
     private static final Logger LOG = Logger.getLogger("UsuarioService");
-    
+
     /**
      * Obtiene un usuario en base al ID
+     *
      * @param id
      * @return Registro especifico de usuario
      */
-    public Usuario getUsuario(Long id) {
+    public UsuarioDto getUsuario(Long id) {
         try {
-            return em.find(Usuario.class, id);
+            Usuario usuario = (Usuario) em.createNamedQuery("Usuario.findById")
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+            UsuarioDto usuarioDto = converter.getUsuarioDto(usuario);
+            usuarioDto.setAdmin(isAdmin(usuarioDto));
+            
+            return usuarioDto;
         } catch (NoResultException nre) {
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+
+    /**
+     *
+     * @param usuarioDto
+     * @return
+     */
+    public UsuarioDto saveUsuario(UsuarioDto usuarioDto) {
+        try {
+            Usuario usuario = converter.getUsuario(usuarioDto);
+
+            em.getTransaction().begin();
+            em.merge(usuario);
+            em.flush();
+            em.getTransaction().commit();
+
+            return converter.getUsuarioDto(usuario);
+        } catch (IllegalAccessException | InvocationTargetException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    /**
+     *
+     * @param user
+     * @param pass
+     * @return
+     */
+    public UsuarioDto getUsuarioByCredentials(String user, String pass) {
+        try {
+
+            Usuario usuario = (Usuario) em.createNamedQuery("Usuario.findByUsernameAndPassword")
+                    .setParameter("username", user)
+                    .setParameter("password", pass)
+                    .getSingleResult();
+
+            return converter.getUsuarioDto(usuario);
+
+        } catch (NoResultException nre) {
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
         }
         return null;
     }
     
     /**
+     * 
+     * @param usuario
+     * @return 
+     */
+    private Boolean isAdmin(UsuarioDto usuario) {
+        try {
+            
+            if( !Util.isEmpty(usuario.getTipoUsuarioDto()) ) {
+                if ( Constants.DB_USR_TIPO_ADMIN_ID.equals(usuario.getTipoUsuarioDto().getId()) ) {
+                    return true;
+                }
+            }            
+        } catch (NoResultException nre) {
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
      * Obtiene una Lista de Tipos de Usuario
+     *
      * @return Lista de Tipos de Usuarios
      */
     public List<TipoUsuario> getTiposUsuarios() {
         try {
             return em.createNamedQuery("TipoUsuario.findAll").getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+           LOG.log(Level.SEVERE, null, ex);
         }
         return null;
     }
+
+    
 }

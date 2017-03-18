@@ -21,11 +21,10 @@ public final class Util {
 
     /**
      * 
-     * @param subject
-     * @param name
+     * @param id
      * @return 
      */
-    public static String createToken(String subject, String name) {
+    public static String createToken(Long id) {
 
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
@@ -33,10 +32,9 @@ public final class Util {
         //Let's set the JWT Claims
         JwtBuilder builder = Jwts.builder()
                 .setIssuedAt(now)
-                .setSubject(subject)
-                .setId(name)
+                .setSubject(id.toString())
                 //.setExpiration(new Date(Constants.EXP_TOKEN))
-                .signWith(SignatureAlgorithm.ES256.HS256, Constants.SECRET_KEY);
+                .signWith(SignatureAlgorithm.HS256, Constants.SECRET_KEY);
 
         //Builds the JWT and serializes it to a compact, URL-safe string
         return builder.compact();

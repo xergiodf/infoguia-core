@@ -2,24 +2,25 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="infoGuiaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>com.minicubic.infoguiaserver.model.TipoUsuario</class>
-    <class>com.minicubic.infoguiaserver.model.EstadoUsuario</class>
-    <class>com.minicubic.infoguiaserver.model.Usuario</class>
-    <class>com.minicubic.infoguiaserver.model.ClienteCategoria</class>
-    <class>com.minicubic.infoguiaserver.model.Cliente</class>
-    <class>com.minicubic.infoguiaserver.model.ClienteSucursales</class>
-    <class>com.minicubic.infoguiaserver.model.SucursalHorariosCab</class>
-    <class>com.minicubic.infoguiaserver.model.TiposContactos</class>
-    <class>com.minicubic.infoguiaserver.model.TiposHorarios</class>
-    <class>com.minicubic.infoguiaserver.model.UsuarioMensajesCab</class>
-    <class>com.minicubic.infoguiaserver.model.SucursalContactos</class>
-    <class>com.minicubic.infoguiaserver.model.SucursalValoracionCab</class>
-    <class>com.minicubic.infoguiaserver.model.TiposPublicaciones</class>
-    <class>com.minicubic.infoguiaserver.model.SucursalHorariosDet</class>
-    <class>com.minicubic.infoguiaserver.model.SucursalValoracionDet</class>
-    <class>com.minicubic.infoguiaserver.model.ClienteProductos</class>
-    <class>com.minicubic.infoguiaserver.model.ClientePublicaciones</class>
-    <class>com.minicubic.infoguiaserver.model.EstadosPublicaciones</class>
+    <class>com.minicubic.infoguiacore.model.TipoUsuario</class>
+    <class>com.minicubic.infoguiacore.model.EstadoUsuario</class>
+    <class>com.minicubic.infoguiacore.model.Usuario</class>
+    <class>com.minicubic.infoguiacore.model.ClienteCategoria</class>
+    <class>com.minicubic.infoguiacore.model.Cliente</class>
+    <class>com.minicubic.infoguiacore.model.ClienteSucursales</class>
+    <class>com.minicubic.infoguiacore.model.SucursalHorariosCab</class>
+    <class>com.minicubic.infoguiacore.model.TiposContactos</class>
+    <class>com.minicubic.infoguiacore.model.TiposHorarios</class>
+    <class>com.minicubic.infoguiacore.model.UsuarioMensajesCab</class>
+    <class>com.minicubic.infoguiacore.model.SucursalContactos</class>
+    <class>com.minicubic.infoguiacore.model.SucursalValoracionCab</class>
+    <class>com.minicubic.infoguiacore.model.TiposPublicaciones</class>
+    <class>com.minicubic.infoguiacore.model.SucursalHorariosDet</class>
+    <class>com.minicubic.infoguiacore.model.SucursalValoracionDet</class>
+    <class>com.minicubic.infoguiacore.model.ClienteProductos</class>
+    <class>com.minicubic.infoguiacore.model.ClientePublicaciones</class>
+    <class>com.minicubic.infoguiacore.model.EstadosPublicaciones</class>
+    <class>com.minicubic.infoguiacore.model.Categoria</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://45.79.159.123:3306/gndb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="infoguia"/>

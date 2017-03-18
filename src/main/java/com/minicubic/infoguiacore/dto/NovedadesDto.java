@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minicubic.infoguiacore.dto;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +12,9 @@ import lombok.Setter;
  * @author hectorvillalba
  */
 @Data
-public class NovedadesDTO {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class NovedadesDto {
    
     @Getter
     @Setter
@@ -38,7 +38,7 @@ public class NovedadesDTO {
     @Setter
     private String tipoPublicacion;
 
-    public NovedadesDTO(Integer id, String titulo, String descripconCorta, String dirImagen, Long idCliente, String nombreCompleto, String tipoPublicacion) {
+    public NovedadesDto(Integer id, String titulo, String descripconCorta, String dirImagen, Long idCliente, String nombreCompleto, String tipoPublicacion) {
         this.id = id;
         this.titulo = titulo;
         this.descripconCorta = descripconCorta;

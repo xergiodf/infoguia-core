@@ -3,25 +3,23 @@ package com.minicubic.infoguiacore.dto;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
- * @author hectorvillalba
+ * @author xergio
+ * @version 1
  */
-
-@Data
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Request<T> {
+public class EstadoUsuarioDto {
+
+    @Getter
+    @Setter
+    private Integer id;
     
     @Getter
     @Setter
-    private String type;
-    
-    @Getter
-    @Setter
-    private T data;
+    private String descripcion;
 }

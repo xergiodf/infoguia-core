@@ -3,24 +3,22 @@ package com.minicubic.infoguiacore.dto;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
- * @author hectorvillalba
+ * @author xergio
+ * @version 1
  */
-
-@Data
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Request<T> {
-    
+public class ValidatorResponse<T> {
+
     @Getter
     @Setter
-    private String type;
-    
+    private String mensaje;
+
     @Getter
     @Setter
     private T data;
