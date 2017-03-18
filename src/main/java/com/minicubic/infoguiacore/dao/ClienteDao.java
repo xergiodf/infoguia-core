@@ -1,29 +1,18 @@
 package com.minicubic.infoguiacore.dao;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.minicubic.infoguiacore.dto.ClientesDTO;
-import com.minicubic.infoguiacore.dto.NovedadesDTO;
-=======
 import com.minicubic.infoguiacore.dto.ClienteDto;
 import com.minicubic.infoguiacore.dto.NovedadesDto;
->>>>>>> origin/master
 import com.minicubic.infoguiacore.model.Cliente;
 import com.minicubic.infoguiacore.util.PersistenceManager;
-<<<<<<< HEAD
 import java.io.Serializable;
-=======
 import com.minicubic.infoguiacore.util.converter.ClienteConverter;
 import java.lang.reflect.InvocationTargetException;
->>>>>>> origin/master
-=======
 import com.minicubic.infoguiacore.dto.ClienteDto;
 import com.minicubic.infoguiacore.dto.NovedadesDto;
 import com.minicubic.infoguiacore.model.Cliente;
 import com.minicubic.infoguiacore.util.PersistenceManager;
 import com.minicubic.infoguiacore.util.converter.ClienteConverter;
 import java.lang.reflect.InvocationTargetException;
->>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +29,6 @@ public class ClienteDao implements Serializable{
     private final ClienteConverter converter = new ClienteConverter();
     private final EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
     private static final Logger LOG = Logger.getLogger("ClienteService");
-<<<<<<< HEAD
     
     public List<Cliente> getClientes(Cliente params) {
         try {
@@ -55,8 +43,7 @@ public class ClienteDao implements Serializable{
         return null;
     }
     
-    public List<ClientesDTO> getClientesPorSucursal(ClientesDTO params) {
-=======
+ 
 
     /**
      *
@@ -100,10 +87,6 @@ public class ClienteDao implements Serializable{
      * @return
      */
     public List<ClienteDto> getClientes(ClienteDto clienteDto) {
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
         try {
             LOG.info("getClientesPorSucursal... ");
             Query query = em.createNativeQuery("SELECT com.minicubic.infoguiacore.dto.ClientesDTO(c.id, c.nombreCompleto, "
@@ -154,19 +137,9 @@ public class ClienteDao implements Serializable{
     public List<NovedadesDto> getNovedades() {
         try {
             LOG.info("getNovedades...");
-<<<<<<< HEAD
-<<<<<<< HEAD
             return em.createQuery("SELECT new com.minicubic.infoguiacore.dto.NovedadesDTO(cp.id, cp.titulo, cp.descripcionCorta, cp.dirImagen, c.id as idcliente, c.nombreCompleto, "
                                                 + "tp.descripcion as tipo_publicacion) FROM ClientePublicaciones \n" +
                                                 "cp join cp.idCliente c join cp.tipoPublicacionesId tp ").getResultList();
-=======
-=======
->>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
-            Query query = em.createQuery("SELECT new com.minicubic.infoguiacore.dto.NovedadesDTO(cp.id, cp.titulo, cp.descripcionCorta, cp.dirImagen, c.id as idcliente, c.nombreCompleto, "
-                    + "tp.descripcion as tipo_publicacion) FROM ClientePublicaciones \n"
-                    + "cp join cp.idCliente c join cp.tipoPublicacionesId tp ", NovedadesDto.class);
-            return query.getResultList();
->>>>>>> origin/master
         } catch (Exception e) {
             e.printStackTrace();
         }

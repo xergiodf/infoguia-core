@@ -30,7 +30,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-<<<<<<< HEAD
           <groupId>javax.persistence</groupId>
          <artifactId>persistence-api</artifactId>
          <version>1.0.2</version>
@@ -45,20 +44,6 @@
               <artifactId>hibernate-jpa-2.1-api</artifactId>
             </exclusion>
           </exclusions>
-=======
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.1.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>dom4j</groupId>
-                    <artifactId>dom4j</artifactId>
-                </exclusion>
-            </exclusions>
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -80,8 +65,6 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.6.0</version>
-<<<<<<< HEAD
-=======
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -108,10 +91,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.4</version>
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
         </dependency>
     </dependencies>
 </project>
