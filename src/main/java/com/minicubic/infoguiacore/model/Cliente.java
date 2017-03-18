@@ -73,12 +73,15 @@ public class Cliente implements Serializable {
     private Date fechaInicio;
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ClienteCategoria clienteCategoria;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
 =======
+=======
+>>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
     @JoinTable(name = "clientes_categorias", joinColumns = {
         @JoinColumn(name = "clientes_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "categorias_id", referencedColumnName = "id")})
@@ -86,7 +89,10 @@ public class Cliente implements Serializable {
     private Collection<Categoria> categoriaCollection;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
     private Collection<Usuario> usuarioCollection;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
@@ -165,6 +171,7 @@ public class Cliente implements Serializable {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public ClienteCategoria getClienteCategoria() {
         return clienteCategoria;
     }
@@ -175,6 +182,8 @@ public class Cliente implements Serializable {
 
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> 574076d7cdd0fbe62358add52be2e9b562e838f4
     @XmlTransient
     public Collection<Usuario> getUsuarioCollection() {
         return usuarioCollection;
