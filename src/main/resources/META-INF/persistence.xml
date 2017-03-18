@@ -20,6 +20,7 @@
     <class>com.minicubic.infoguiacore.model.ClienteProductos</class>
     <class>com.minicubic.infoguiacore.model.ClientePublicaciones</class>
     <class>com.minicubic.infoguiacore.model.EstadosPublicaciones</class>
+    <class>com.minicubic.infoguiacore.model.Categoria</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://45.79.159.123:3306/gndb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="infoguia"/>

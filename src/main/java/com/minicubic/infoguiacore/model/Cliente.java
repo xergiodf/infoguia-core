@@ -3,7 +3,7 @@ package com.minicubic.infoguiacore.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,8 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -40,12 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByFechaAlta", query = "SELECT c FROM Cliente c WHERE c.fechaAlta = :fechaAlta"),
     @NamedQuery(name = "Cliente.findByFechaInicio", query = "SELECT c FROM Cliente c WHERE c.fechaInicio = :fechaInicio")})
 public class Cliente implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
-    private List<ClientePublicaciones> clientePublicacionesList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
-    private List<ClienteSucursales> clienteSucursalesList;
 
     private static final long serialVersionUID = 1L;
     
@@ -78,12 +73,20 @@ public class Cliente implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private ClienteCategoria idCategoria;
-    
+    @JoinTable(name = "clientes_categorias", joinColumns = {
+        @JoinColumn(name = "clientes_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "categorias_id", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Categoria> categoriaCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Collection<Usuario> usuarioCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
+    private Collection<ClientePublicaciones> clientePublicacionesCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
+    private Collection<ClienteSucursales> clienteSucursalesCollection;
 
     public Cliente() {
     }
@@ -154,14 +157,6 @@ public class Cliente implements Serializable {
         this.fechaInicio = fechaInicio;
     }
 
-    public ClienteCategoria getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(ClienteCategoria idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
     @XmlTransient
     public Collection<Usuario> getUsuarioCollection() {
         return usuarioCollection;
@@ -197,21 +192,30 @@ public class Cliente implements Serializable {
     }
 
     @XmlTransient
-    public List<ClienteSucursales> getClienteSucursalesList() {
-        return clienteSucursalesList;
+    public Collection<ClienteSucursales> getClienteSucursalesCollection() {
+        return clienteSucursalesCollection;
     }
 
-    public void setClienteSucursalesList(List<ClienteSucursales> clienteSucursalesList) {
-        this.clienteSucursalesList = clienteSucursalesList;
+    public void setClienteSucursalesCollection(Collection<ClienteSucursales> clienteSucursalesCollection) {
+        this.clienteSucursalesCollection = clienteSucursalesCollection;
     }
 
     @XmlTransient
-    public List<ClientePublicaciones> getClientePublicacionesList() {
-        return clientePublicacionesList;
+    public Collection<ClientePublicaciones> getClientePublicacionesCollection() {
+        return clientePublicacionesCollection;
     }
 
-    public void setClientePublicacionesList(List<ClientePublicaciones> clientePublicacionesList) {
-        this.clientePublicacionesList = clientePublicacionesList;
+    public void setClientePublicacionesCollection(Collection<ClientePublicaciones> clientePublicacionesCollection) {
+        this.clientePublicacionesCollection = clientePublicacionesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Categoria> getCategoriaCollection() {
+        return categoriaCollection;
+    }
+
+    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+        this.categoriaCollection = categoriaCollection;
     }
     
 }

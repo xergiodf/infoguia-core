@@ -1,7 +1,9 @@
 package com.minicubic.infoguiacore.util;
 
+import com.minicubic.infoguiacore.dto.ClienteDto;
 import com.minicubic.infoguiacore.dto.Response;
 import com.minicubic.infoguiacore.dto.UsuarioDto;
+import com.minicubic.infoguiacore.dto.ValidatorResponse;
 
 /**
  *
@@ -20,8 +22,13 @@ public class Validator {
         return INSTANCE;
     }
 
-    public Response<Boolean> validateUsuarioRegistro(UsuarioDto usuarioDto) {
-        Response<Boolean> response = new Response<>();
+    /**
+     * 
+     * @param usuarioDto
+     * @return 
+     */
+    public ValidatorResponse<Boolean> validateAddUsuario(UsuarioDto usuarioDto) {
+        ValidatorResponse<Boolean> response = new ValidatorResponse<>();
         response.setData(new Boolean(true));
         
         if ( Util.isEmpty(usuarioDto.getUsername()) ) {
@@ -47,5 +54,20 @@ public class Validator {
         return response;
     }
     
-    // Validar Usuario
+    /**
+     * 
+     * @param clienteDto
+     * @return 
+     */
+    public ValidatorResponse<Boolean> validateAddCliente(ClienteDto clienteDto) {
+        ValidatorResponse<Boolean> response = new ValidatorResponse<>();
+        response.setData(new Boolean(true));
+        
+        if ( Util.isEmpty(clienteDto.getNombreCompleto()) ) {
+            response.setData(new Boolean(false));
+            response.setMensaje(response.getMensaje().concat(Constants.VALIDATION_CLIENTE_NOMBRECOMPLETO_REQUIRED));
+        }
+        
+        return response;
+    }    
 }
