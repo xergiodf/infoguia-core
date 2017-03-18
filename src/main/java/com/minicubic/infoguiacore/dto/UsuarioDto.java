@@ -59,4 +59,12 @@ public class UsuarioDto {
     @Getter
     @Setter
     private String tokenAuth;
+    
+    @Getter
+    @Setter
+    private String newPassword;
+    
+    @Getter
+    @Setter
+    private Boolean admin;
 }
