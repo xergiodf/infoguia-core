@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
-    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
+    @NamedQuery(name = "Usuario.findByUsernameAndPassword", query = "SELECT u FROM Usuario u WHERE u.username = :username AND u.password = :password"),
     @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro"),
     @NamedQuery(name = "Usuario.findByFechaExpiracion", query = "SELECT u FROM Usuario u WHERE u.fechaExpiracion = :fechaExpiracion"),
     @NamedQuery(name = "Usuario.findByTokenCambioPass", query = "SELECT u FROM Usuario u WHERE u.tokenCambioPass = :tokenCambioPass"),
@@ -79,15 +78,15 @@ public class Usuario implements Serializable {
     
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Cliente idCliente;
+    private Cliente cliente;
     
     @JoinColumn(name = "tipo_usuarios_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TipoUsuario tipoUsuariosId;
+    private TipoUsuario tipoUsuario;
     
     @JoinColumn(name = "id_usuario_estados", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EstadoUsuario idUsuarioEstados;
+    private EstadoUsuario usuarioEstado;
 
     public Usuario() {
     }
@@ -159,28 +158,28 @@ public class Usuario implements Serializable {
         this.tokenConfirmacion = tokenConfirmacion;
     }
 
-    public Cliente getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente Cliente) {
+        this.cliente = Cliente;
     }
 
-    public TipoUsuario getTipoUsuariosId() {
-        return tipoUsuariosId;
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setTipoUsuariosId(TipoUsuario tipoUsuariosId) {
-        this.tipoUsuariosId = tipoUsuariosId;
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public EstadoUsuario getIdUsuarioEstados() {
-        return idUsuarioEstados;
+    public EstadoUsuario getUsuarioEstado() {
+        return usuarioEstado;
     }
 
-    public void setIdUsuarioEstados(EstadoUsuario idUsuarioEstados) {
-        this.idUsuarioEstados = idUsuarioEstados;
+    public void setUsuarioEstado(EstadoUsuario usuarioEstados) {
+        this.usuarioEstado = usuarioEstados;
     }
 
     @Override

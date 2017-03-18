@@ -82,7 +82,7 @@ public class Cliente implements Serializable {
     @ManyToOne(optional = false)
     private ClienteCategoria idCategoria;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Collection<Usuario> usuarioCollection;
 
     public Cliente() {

@@ -1,5 +1,8 @@
 package com.minicubic.infoguiacore.dto;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,11 +13,13 @@ import lombok.Setter;
  */
 
 @Data
-public class ClientesDTO {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ClienteDto {
     
     @Getter
     @Setter
-    private Integer id;
+    private Long id;
     @Getter
     @Setter
     private String nombreCompleto;
