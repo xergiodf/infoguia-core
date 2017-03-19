@@ -1,7 +1,6 @@
 package com.minicubic.infoguiacore.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -14,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -57,8 +55,8 @@ public class Cliente implements Serializable {
     @Column(name = "nombre_corto")
     private String nombreCorto;
     
-    @Column(name = "description_completa", columnDefinition = "text")
-    private String descriptionCompleta;
+    @Column(name = "descripcion_completa", columnDefinition = "text")
+    private String descripcionCompleta;
     
     @Column(name = "descripcion_corta")
     private String descripcionCorta;
