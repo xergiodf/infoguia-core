@@ -57,13 +57,12 @@ public class Cliente implements Serializable {
     @Column(name = "nombre_corto")
     private String nombreCorto;
     
-    @Lob
-    @Column(name = "descripcion_completa", columnDefinition = "text")
-    private String descripcionCompleta;
+    @Column(name = "description_completa", columnDefinition = "text")
+    private String descriptionCompleta;
     
     @Column(name = "descripcion_corta")
     private String descripcionCorta;
-    
+     
     @Basic(optional = false)
     @Column(name = "fecha_alta", updatable= false)
     @Temporal(TemporalType.TIMESTAMP)
