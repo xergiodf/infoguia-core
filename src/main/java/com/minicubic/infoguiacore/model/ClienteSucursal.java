@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ClienteSucursal.findById", query = "SELECT c FROM ClienteSucursal c WHERE c.id = :id"),
     @NamedQuery(name = "ClienteSucursal.findByNombreSucursal", query = "SELECT c FROM ClienteSucursal c WHERE c.nombreSucursal = :nombreSucursal"),
     @NamedQuery(name = "ClienteSucursal.findByDireccionFisica", query = "SELECT c FROM ClienteSucursal c WHERE c.direccionFisica = :direccionFisica"),
-    @NamedQuery(name = "ClienteSucursal.findByCoordenadas", query = "SELECT c FROM ClienteSucursal c WHERE c.coordenadas = :coordenadas")})
+    @NamedQuery(name = "ClienteSucursal.findByCoordenadas", query = "SELECT c FROM ClienteSucursal c WHERE c.coordenadas = :coordenadas"),
+    @NamedQuery(name = "ClienteSucursal.findByCliente", query = "SELECT c FROM ClienteSucursal c WHERE c.cliente.id = :clienteId")
+})
 public class ClienteSucursal implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteSucursal", fetch = FetchType.LAZY)

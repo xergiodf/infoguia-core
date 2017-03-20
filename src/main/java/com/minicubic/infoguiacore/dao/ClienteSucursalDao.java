@@ -57,6 +57,25 @@ public class ClienteSucursalDao implements Serializable{
         }
         return null;
     }
+    
+    /**
+     * 
+     * @param clienteId
+     * @return 
+     */
+    public List<ClienteSucursalDto> getClienteSucursalesByCliente(Long clienteId) {
+        try {
+            List<ClienteSucursal> clientes = em.createNamedQuery("ClienteSucursal.findByCliente")
+                    .setParameter("clienteId", clienteId)
+                    .getResultList();
+
+            return converter.getClienteSucursalesDto(clientes);
+        } catch (NoResultException nre) {
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     /**
      *
