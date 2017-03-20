@@ -1,12 +1,6 @@
 package com.minicubic.infoguiacore.dao;
 
-import com.minicubic.infoguiacore.dto.ClienteDto;
-import com.minicubic.infoguiacore.dto.NovedadesDto;
-import com.minicubic.infoguiacore.model.Cliente;
-import com.minicubic.infoguiacore.util.PersistenceManager;
 import java.io.Serializable;
-import com.minicubic.infoguiacore.util.converter.ClienteConverter;
-import java.lang.reflect.InvocationTargetException;
 import com.minicubic.infoguiacore.dto.ClienteDto;
 import com.minicubic.infoguiacore.dto.NovedadesDto;
 import com.minicubic.infoguiacore.model.Cliente;

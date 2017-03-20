@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "sucursal_horarios_cab")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SucursalHorariosCab.findAll", query = "SELECT s FROM SucursalHorariosCab s"),
-    @NamedQuery(name = "SucursalHorariosCab.findById", query = "SELECT s FROM SucursalHorariosCab s WHERE s.id = :id")})
-public class SucursalHorariosCab implements Serializable {
+    @NamedQuery(name = "SucursalHorarioCab.findAll", query = "SELECT s FROM SucursalHorarioCab s"),
+    @NamedQuery(name = "SucursalHorarioCab.findById", query = "SELECT s FROM SucursalHorarioCab s WHERE s.id = :id")})
+public class SucursalHorarioCab implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,17 +44,17 @@ public class SucursalHorariosCab implements Serializable {
     private Integer id;
     @JoinColumn(name = "id_cliente_sucursal", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ClienteSucursales idClienteSucursal;
+    private ClienteSucursal idClienteSucursal;
     @JoinColumn(name = "id_tipo_horario", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TiposHorarios idTipoHorario;
+    private TipoHorario idTipoHorario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCabecera", fetch = FetchType.LAZY)
-    private List<SucursalHorariosDet> sucursalHorariosDetList;
+    private List<SucursalHorarioDet> sucursalHorariosDetList;
 
-    public SucursalHorariosCab() {
+    public SucursalHorarioCab() {
     }
 
-    public SucursalHorariosCab(Integer id) {
+    public SucursalHorarioCab(Integer id) {
         this.id = id;
     }
 
@@ -66,28 +66,28 @@ public class SucursalHorariosCab implements Serializable {
         this.id = id;
     }
 
-    public ClienteSucursales getIdClienteSucursal() {
+    public ClienteSucursal getIdClienteSucursal() {
         return idClienteSucursal;
     }
 
-    public void setIdClienteSucursal(ClienteSucursales idClienteSucursal) {
+    public void setIdClienteSucursal(ClienteSucursal idClienteSucursal) {
         this.idClienteSucursal = idClienteSucursal;
     }
 
-    public TiposHorarios getIdTipoHorario() {
+    public TipoHorario getIdTipoHorario() {
         return idTipoHorario;
     }
 
-    public void setIdTipoHorario(TiposHorarios idTipoHorario) {
+    public void setIdTipoHorario(TipoHorario idTipoHorario) {
         this.idTipoHorario = idTipoHorario;
     }
 
     @XmlTransient
-    public List<SucursalHorariosDet> getSucursalHorariosDetList() {
+    public List<SucursalHorarioDet> getSucursalHorariosDetList() {
         return sucursalHorariosDetList;
     }
 
-    public void setSucursalHorariosDetList(List<SucursalHorariosDet> sucursalHorariosDetList) {
+    public void setSucursalHorariosDetList(List<SucursalHorarioDet> sucursalHorariosDetList) {
         this.sucursalHorariosDetList = sucursalHorariosDetList;
     }
 
@@ -101,10 +101,10 @@ public class SucursalHorariosCab implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SucursalHorariosCab)) {
+        if (!(object instanceof SucursalHorarioCab)) {
             return false;
         }
-        SucursalHorariosCab other = (SucursalHorariosCab) object;
+        SucursalHorarioCab other = (SucursalHorarioCab) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -113,7 +113,7 @@ public class SucursalHorariosCab implements Serializable {
 
     @Override
     public String toString() {
-        return "com.minicubic.infoguiaserver.model.SucursalHorariosCab[ id=" + id + " ]";
+        return "com.minicubic.infoguiaserver.model.SucursalHorarioCab[ id=" + id + " ]";
     }
     
 }

@@ -79,11 +79,11 @@ public class Cliente implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Collection<Usuario> usuarioCollection;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
-    private Collection<ClientePublicaciones> clientePublicacionesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.LAZY)
+    private Collection<ClientePublicacion> clientePublicacionesCollection;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
-    private Collection<ClienteSucursales> clienteSucursalesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.LAZY)
+    private Collection<ClienteSucursal> clienteSucursalesCollection;
 
     public Cliente() {
     }
@@ -189,20 +189,20 @@ public class Cliente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ClienteSucursales> getClienteSucursalesCollection() {
+    public Collection<ClienteSucursal> getClienteSucursalesCollection() {
         return clienteSucursalesCollection;
     }
 
-    public void setClienteSucursalesCollection(Collection<ClienteSucursales> clienteSucursalesCollection) {
+    public void setClienteSucursalesCollection(Collection<ClienteSucursal> clienteSucursalesCollection) {
         this.clienteSucursalesCollection = clienteSucursalesCollection;
     }
 
     @XmlTransient
-    public Collection<ClientePublicaciones> getClientePublicacionesCollection() {
+    public Collection<ClientePublicacion> getClientePublicacionesCollection() {
         return clientePublicacionesCollection;
     }
 
-    public void setClientePublicacionesCollection(Collection<ClientePublicaciones> clientePublicacionesCollection) {
+    public void setClientePublicacionesCollection(Collection<ClientePublicacion> clientePublicacionesCollection) {
         this.clientePublicacionesCollection = clientePublicacionesCollection;
     }
 

@@ -2,6 +2,7 @@ package com.minicubic.infoguiacore.util.converter;
 
 import com.minicubic.infoguiacore.dto.UsuarioDto;
 import com.minicubic.infoguiacore.model.Usuario;
+import com.minicubic.infoguiacore.util.Util;
 import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 
@@ -25,13 +26,13 @@ public class UsuarioConverter {
         }
 
         // Cargamos las propiedas compuestas
-        if (usuarioDto.getClienteDto() != null)       
+        if ( !Util.isEmpty(usuarioDto.getClienteDto()) )       
             usuario.setCliente(new ClienteConverter().getCliente(usuarioDto.getClienteDto()));
         
-        if (usuarioDto.getTipoUsuarioDto() != null)
+        if ( !Util.isEmpty(usuarioDto.getTipoUsuarioDto()) )
             usuario.setTipoUsuario(new TipoUsuarioConverter().getTipoUsuario(usuarioDto.getTipoUsuarioDto()));
         
-        if ( usuarioDto.getUsuarioEstadoDto() != null ) {
+        if ( !Util.isEmpty(usuarioDto.getUsuarioEstadoDto()) ) {
             usuario.setUsuarioEstado(new EstadoUsuarioConverter().getEstadoUsuario(usuarioDto.getUsuarioEstadoDto()));
         }
 
@@ -49,13 +50,13 @@ public class UsuarioConverter {
         }
 
         // Cargamos las propiedas compuestas
-        if (usuario.getCliente() != null)       
+        if ( !Util.isEmpty(usuario.getCliente()) )       
             usuarioDto.setClienteDto(new ClienteConverter().getClienteDto(usuario.getCliente()));
         
-        if (usuario.getTipoUsuario() != null)
+        if ( !Util.isEmpty(usuario.getTipoUsuario()) )
             usuarioDto.setTipoUsuarioDto(new TipoUsuarioConverter().getTipoUsuarioDto(usuario.getTipoUsuario()));
         
-        if ( usuario.getUsuarioEstado() != null ) {
+        if ( !Util.isEmpty(usuario.getUsuarioEstado()) ) {
             usuarioDto.setUsuarioEstadoDto(new EstadoUsuarioConverter().getEstadoUsuarioDto(usuario.getUsuarioEstado()));
         }
         

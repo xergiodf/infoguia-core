@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minicubic.infoguiacore.model;
 
 import java.io.Serializable;
@@ -28,35 +23,39 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "sucursal_contactos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SucursalContactos.findAll", query = "SELECT s FROM SucursalContactos s"),
-    @NamedQuery(name = "SucursalContactos.findById", query = "SELECT s FROM SucursalContactos s WHERE s.id = :id"),
-    @NamedQuery(name = "SucursalContactos.findByContacto", query = "SELECT s FROM SucursalContactos s WHERE s.contacto = :contacto")})
-public class SucursalContactos implements Serializable {
+    @NamedQuery(name = "SucursalContacto.findAll", query = "SELECT s FROM SucursalContacto s"),
+    @NamedQuery(name = "SucursalContacto.findById", query = "SELECT s FROM SucursalContacto s WHERE s.id = :id"),
+    @NamedQuery(name = "SucursalContacto.findByContacto", query = "SELECT s FROM SucursalContacto s WHERE s.contacto = :contacto")})
+public class SucursalContacto implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Basic(optional = false)
     @Column(name = "contacto")
     private String contacto;
+    
     @JoinColumn(name = "id_tipo_contactos", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TiposContactos idTipoContactos;
+    private TipoContacto tipoContacto;
+    
     @JoinColumn(name = "id_cliente_sucursal", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ClienteSucursales idClienteSucursal;
+    private ClienteSucursal clienteSucursal;
 
-    public SucursalContactos() {
+    public SucursalContacto() {
     }
 
-    public SucursalContactos(Integer id) {
+    public SucursalContacto(Integer id) {
         this.id = id;
     }
 
-    public SucursalContactos(Integer id, String contacto) {
+    public SucursalContacto(Integer id, String contacto) {
         this.id = id;
         this.contacto = contacto;
     }
@@ -77,20 +76,20 @@ public class SucursalContactos implements Serializable {
         this.contacto = contacto;
     }
 
-    public TiposContactos getIdTipoContactos() {
-        return idTipoContactos;
+    public TipoContacto getTipoContacto() {
+        return tipoContacto;
     }
 
-    public void setIdTipoContactos(TiposContactos idTipoContactos) {
-        this.idTipoContactos = idTipoContactos;
+    public void setTipoContacto(TipoContacto idTipoContactos) {
+        this.tipoContacto = idTipoContactos;
     }
 
-    public ClienteSucursales getIdClienteSucursal() {
-        return idClienteSucursal;
+    public ClienteSucursal getClienteSucursal() {
+        return clienteSucursal;
     }
 
-    public void setIdClienteSucursal(ClienteSucursales idClienteSucursal) {
-        this.idClienteSucursal = idClienteSucursal;
+    public void setClienteSucursal(ClienteSucursal idClienteSucursal) {
+        this.clienteSucursal = idClienteSucursal;
     }
 
     @Override
@@ -103,10 +102,10 @@ public class SucursalContactos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SucursalContactos)) {
+        if (!(object instanceof SucursalContacto)) {
             return false;
         }
-        SucursalContactos other = (SucursalContactos) object;
+        SucursalContacto other = (SucursalContacto) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -115,7 +114,7 @@ public class SucursalContactos implements Serializable {
 
     @Override
     public String toString() {
-        return "com.minicubic.infoguiaserver.model.SucursalContactos[ id=" + id + " ]";
+        return "com.minicubic.infoguiaserver.model.SucursalContacto[ id=" + id + " ]";
     }
     
 }

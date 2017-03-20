@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "sucursal_horarios_det")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SucursalHorariosDet.findAll", query = "SELECT s FROM SucursalHorariosDet s"),
-    @NamedQuery(name = "SucursalHorariosDet.findById", query = "SELECT s FROM SucursalHorariosDet s WHERE s.id = :id"),
-    @NamedQuery(name = "SucursalHorariosDet.findByHoraDesde", query = "SELECT s FROM SucursalHorariosDet s WHERE s.horaDesde = :horaDesde"),
-    @NamedQuery(name = "SucursalHorariosDet.findByHoraHasta", query = "SELECT s FROM SucursalHorariosDet s WHERE s.horaHasta = :horaHasta")})
-public class SucursalHorariosDet implements Serializable {
+    @NamedQuery(name = "SucursalHorarioDet.findAll", query = "SELECT s FROM SucursalHorarioDet s"),
+    @NamedQuery(name = "SucursalHorarioDet.findById", query = "SELECT s FROM SucursalHorarioDet s WHERE s.id = :id"),
+    @NamedQuery(name = "SucursalHorarioDet.findByHoraDesde", query = "SELECT s FROM SucursalHorarioDet s WHERE s.horaDesde = :horaDesde"),
+    @NamedQuery(name = "SucursalHorarioDet.findByHoraHasta", query = "SELECT s FROM SucursalHorarioDet s WHERE s.horaHasta = :horaHasta")})
+public class SucursalHorarioDet implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,16 +53,16 @@ public class SucursalHorariosDet implements Serializable {
     private String horaHasta;
     @JoinColumn(name = "id_cabecera", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private SucursalHorariosCab idCabecera;
+    private SucursalHorarioCab idCabecera;
 
-    public SucursalHorariosDet() {
+    public SucursalHorarioDet() {
     }
 
-    public SucursalHorariosDet(Integer id) {
+    public SucursalHorarioDet(Integer id) {
         this.id = id;
     }
 
-    public SucursalHorariosDet(Integer id, String dias, String horaDesde, String horaHasta) {
+    public SucursalHorarioDet(Integer id, String dias, String horaDesde, String horaHasta) {
         this.id = id;
         this.dias = dias;
         this.horaDesde = horaDesde;
@@ -101,11 +101,11 @@ public class SucursalHorariosDet implements Serializable {
         this.horaHasta = horaHasta;
     }
 
-    public SucursalHorariosCab getIdCabecera() {
+    public SucursalHorarioCab getIdCabecera() {
         return idCabecera;
     }
 
-    public void setIdCabecera(SucursalHorariosCab idCabecera) {
+    public void setIdCabecera(SucursalHorarioCab idCabecera) {
         this.idCabecera = idCabecera;
     }
 
@@ -119,10 +119,10 @@ public class SucursalHorariosDet implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SucursalHorariosDet)) {
+        if (!(object instanceof SucursalHorarioDet)) {
             return false;
         }
-        SucursalHorariosDet other = (SucursalHorariosDet) object;
+        SucursalHorarioDet other = (SucursalHorarioDet) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -131,7 +131,7 @@ public class SucursalHorariosDet implements Serializable {
 
     @Override
     public String toString() {
-        return "com.minicubic.infoguiaserver.model.SucursalHorariosDet[ id=" + id + " ]";
+        return "com.minicubic.infoguiaserver.model.SucursalHorarioDet[ id=" + id + " ]";
     }
     
 }

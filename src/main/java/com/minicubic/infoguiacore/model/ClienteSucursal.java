@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minicubic.infoguiacore.model;
 
 import java.io.Serializable;
@@ -32,58 +27,51 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "cliente_sucursales")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ClienteSucursales.findAll", query = "SELECT c FROM ClienteSucursales c"),
-    @NamedQuery(name = "ClienteSucursales.findById", query = "SELECT c FROM ClienteSucursales c WHERE c.id = :id"),
-    @NamedQuery(name = "ClienteSucursales.findByNombreSucursal", query = "SELECT c FROM ClienteSucursales c WHERE c.nombreSucursal = :nombreSucursal"),
-    @NamedQuery(name = "ClienteSucursales.findByDireccionFisica", query = "SELECT c FROM ClienteSucursales c WHERE c.direccionFisica = :direccionFisica"),
-    @NamedQuery(name = "ClienteSucursales.findByCoordenadas", query = "SELECT c FROM ClienteSucursales c WHERE c.coordenadas = :coordenadas"),
-    @NamedQuery(name = "ClienteSucursales.findByHorarios", query = "SELECT c FROM ClienteSucursales c WHERE c.horarios = :horarios"),
-    @NamedQuery(name = "ClienteSucursales.findByTelefono", query = "SELECT c FROM ClienteSucursales c WHERE c.telefono = :telefono"),
-    @NamedQuery(name = "ClienteSucursales.findByTelefono2", query = "SELECT c FROM ClienteSucursales c WHERE c.telefono2 = :telefono2"),
-    @NamedQuery(name = "ClienteSucursales.findByTelefono3", query = "SELECT c FROM ClienteSucursales c WHERE c.telefono3 = :telefono3")})
-public class ClienteSucursales implements Serializable {
+    @NamedQuery(name = "ClienteSucursal.findAll", query = "SELECT c FROM ClienteSucursal c"),
+    @NamedQuery(name = "ClienteSucursal.findById", query = "SELECT c FROM ClienteSucursal c WHERE c.id = :id"),
+    @NamedQuery(name = "ClienteSucursal.findByNombreSucursal", query = "SELECT c FROM ClienteSucursal c WHERE c.nombreSucursal = :nombreSucursal"),
+    @NamedQuery(name = "ClienteSucursal.findByDireccionFisica", query = "SELECT c FROM ClienteSucursal c WHERE c.direccionFisica = :direccionFisica"),
+    @NamedQuery(name = "ClienteSucursal.findByCoordenadas", query = "SELECT c FROM ClienteSucursal c WHERE c.coordenadas = :coordenadas")})
+public class ClienteSucursal implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClienteSucursal", fetch = FetchType.LAZY)
-    private List<SucursalContactos> sucursalContactosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteSucursal", fetch = FetchType.LAZY)
+    private List<SucursalContacto> sucursalContactosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClienteSucursal", fetch = FetchType.LAZY)
     private List<SucursalValoracionCab> sucursalValoracionCabList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClienteSucursal", fetch = FetchType.LAZY)
-    private List<SucursalHorariosCab> sucursalHorariosCabList;
+    private List<SucursalHorarioCab> sucursalHorariosCabList;
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Column(name = "nombre_sucursal")
     private String nombreSucursal;
+    
     @Basic(optional = false)
     @Column(name = "direccion_fisica")
     private String direccionFisica;
+    
     @Basic(optional = false)
     @Column(name = "coordenadas")
     private String coordenadas;
-    @Column(name = "horarios")
-    private String horarios;
-    @Column(name = "telefono")
-    private String telefono;
-    @Column(name = "telefono2")
-    private String telefono2;
-    @Column(name = "telefono3")
-    private String telefono3;
+    
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Cliente idCliente;
+    private Cliente cliente;
 
-    public ClienteSucursales() {
+    public ClienteSucursal() {
     }
 
-    public ClienteSucursales(Integer id) {
+    public ClienteSucursal(Integer id) {
         this.id = id;
     }
 
-    public ClienteSucursales(Integer id, String direccionFisica, String coordenadas) {
+    public ClienteSucursal(Integer id, String direccionFisica, String coordenadas) {
         this.id = id;
         this.direccionFisica = direccionFisica;
         this.coordenadas = coordenadas;
@@ -121,39 +109,6 @@ public class ClienteSucursales implements Serializable {
         this.coordenadas = coordenadas;
     }
 
-    public String getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(String horarios) {
-        this.horarios = horarios;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getTelefono2() {
-        return telefono2;
-    }
-
-    public void setTelefono2(String telefono2) {
-        this.telefono2 = telefono2;
-    }
-
-    public String getTelefono3() {
-        return telefono3;
-    }
-
-    public void setTelefono3(String telefono3) {
-        this.telefono3 = telefono3;
-    }
-
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -164,10 +119,10 @@ public class ClienteSucursales implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClienteSucursales)) {
+        if (!(object instanceof ClienteSucursal)) {
             return false;
         }
-        ClienteSucursales other = (ClienteSucursales) object;
+        ClienteSucursal other = (ClienteSucursal) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -180,11 +135,11 @@ public class ClienteSucursales implements Serializable {
     }
 
     @XmlTransient
-    public List<SucursalContactos> getSucursalContactosList() {
+    public List<SucursalContacto> getSucursalContactosList() {
         return sucursalContactosList;
     }
 
-    public void setSucursalContactosList(List<SucursalContactos> sucursalContactosList) {
+    public void setSucursalContactosList(List<SucursalContacto> sucursalContactosList) {
         this.sucursalContactosList = sucursalContactosList;
     }
 
@@ -197,20 +152,20 @@ public class ClienteSucursales implements Serializable {
         this.sucursalValoracionCabList = sucursalValoracionCabList;
     }
 
-    public Cliente getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente idCliente) {
+        this.cliente = idCliente;
     }
 
     @XmlTransient
-    public List<SucursalHorariosCab> getSucursalHorariosCabList() {
+    public List<SucursalHorarioCab> getSucursalHorariosCabList() {
         return sucursalHorariosCabList;
     }
 
-    public void setSucursalHorariosCabList(List<SucursalHorariosCab> sucursalHorariosCabList) {
+    public void setSucursalHorariosCabList(List<SucursalHorarioCab> sucursalHorariosCabList) {
         this.sucursalHorariosCabList = sucursalHorariosCabList;
     }
     

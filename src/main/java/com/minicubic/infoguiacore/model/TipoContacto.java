@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minicubic.infoguiacore.model;
 
 import java.io.Serializable;
@@ -27,13 +22,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectorvillalba
  */
 @Entity
-@Table(name = "tipos_horarios")
+@Table(name = "tipos_contactos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TiposHorarios.findAll", query = "SELECT t FROM TiposHorarios t"),
-    @NamedQuery(name = "TiposHorarios.findById", query = "SELECT t FROM TiposHorarios t WHERE t.id = :id"),
-    @NamedQuery(name = "TiposHorarios.findByDescripcion", query = "SELECT t FROM TiposHorarios t WHERE t.descripcion = :descripcion")})
-public class TiposHorarios implements Serializable {
+    @NamedQuery(name = "TipoContacto.findAll", query = "SELECT t FROM TipoContacto t"),
+    @NamedQuery(name = "TipoContacto.findById", query = "SELECT t FROM TipoContacto t WHERE t.id = :id"),
+    @NamedQuery(name = "TipoContacto.findByDescripcion", query = "SELECT t FROM TipoContacto t WHERE t.descripcion = :descripcion")})
+public class TipoContacto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,17 +39,17 @@ public class TiposHorarios implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoHorario", fetch = FetchType.LAZY)
-    private List<SucursalHorariosCab> sucursalHorariosCabList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoContacto", fetch = FetchType.LAZY)
+    private List<SucursalContacto> sucursalContactosList;
 
-    public TiposHorarios() {
+    public TipoContacto() {
     }
 
-    public TiposHorarios(Integer id) {
+    public TipoContacto(Integer id) {
         this.id = id;
     }
 
-    public TiposHorarios(Integer id, String descripcion) {
+    public TipoContacto(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -76,12 +71,12 @@ public class TiposHorarios implements Serializable {
     }
 
     @XmlTransient
-    public List<SucursalHorariosCab> getSucursalHorariosCabList() {
-        return sucursalHorariosCabList;
+    public List<SucursalContacto> getSucursalContactosList() {
+        return sucursalContactosList;
     }
 
-    public void setSucursalHorariosCabList(List<SucursalHorariosCab> sucursalHorariosCabList) {
-        this.sucursalHorariosCabList = sucursalHorariosCabList;
+    public void setSucursalContactosList(List<SucursalContacto> sucursalContactosList) {
+        this.sucursalContactosList = sucursalContactosList;
     }
 
     @Override
@@ -94,10 +89,10 @@ public class TiposHorarios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TiposHorarios)) {
+        if (!(object instanceof TipoContacto)) {
             return false;
         }
-        TiposHorarios other = (TiposHorarios) object;
+        TipoContacto other = (TipoContacto) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,7 +101,7 @@ public class TiposHorarios implements Serializable {
 
     @Override
     public String toString() {
-        return "com.minicubic.infoguiaserver.model.TiposHorarios[ id=" + id + " ]";
+        return "com.minicubic.infoguiaserver.model.TipoContacto[ id=" + id + " ]";
     }
     
 }

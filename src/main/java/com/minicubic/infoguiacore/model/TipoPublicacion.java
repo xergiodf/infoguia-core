@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minicubic.infoguiacore.model;
 
 import java.io.Serializable;
@@ -27,34 +22,37 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectorvillalba
  */
 @Entity
-@Table(name = "estados_publicaciones")
+@Table(name = "tipos_publicaciones")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EstadosPublicaciones.findAll", query = "SELECT e FROM EstadosPublicaciones e"),
-    @NamedQuery(name = "EstadosPublicaciones.findById", query = "SELECT e FROM EstadosPublicaciones e WHERE e.id = :id"),
-    @NamedQuery(name = "EstadosPublicaciones.findByDescripcion", query = "SELECT e FROM EstadosPublicaciones e WHERE e.descripcion = :descripcion")})
-public class EstadosPublicaciones implements Serializable {
+    @NamedQuery(name = "TipoPublicacion.findAll", query = "SELECT t FROM TipoPublicacion t"),
+    @NamedQuery(name = "TipoPublicacion.findById", query = "SELECT t FROM TipoPublicacion t WHERE t.id = :id"),
+    @NamedQuery(name = "TipoPublicacion.findByDescripcion", query = "SELECT t FROM TipoPublicacion t WHERE t.descripcion = :descripcion")})
+public class TipoPublicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEstadoPublicacion", fetch = FetchType.LAZY)
-    private List<ClientePublicaciones> clientePublicacionesList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoPublicacion", fetch = FetchType.LAZY)
+    private List<ClientePublicacion> clientePublicacionesList;
 
-    public EstadosPublicaciones() {
+    public TipoPublicacion() {
     }
 
-    public EstadosPublicaciones(Integer id) {
+    public TipoPublicacion(Integer id) {
         this.id = id;
     }
 
-    public EstadosPublicaciones(Integer id, String descripcion) {
+    public TipoPublicacion(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -76,11 +74,11 @@ public class EstadosPublicaciones implements Serializable {
     }
 
     @XmlTransient
-    public List<ClientePublicaciones> getClientePublicacionesList() {
+    public List<ClientePublicacion> getClientePublicacionesList() {
         return clientePublicacionesList;
     }
 
-    public void setClientePublicacionesList(List<ClientePublicaciones> clientePublicacionesList) {
+    public void setClientePublicacionesList(List<ClientePublicacion> clientePublicacionesList) {
         this.clientePublicacionesList = clientePublicacionesList;
     }
 
@@ -94,10 +92,10 @@ public class EstadosPublicaciones implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EstadosPublicaciones)) {
+        if (!(object instanceof TipoPublicacion)) {
             return false;
         }
-        EstadosPublicaciones other = (EstadosPublicaciones) object;
+        TipoPublicacion other = (TipoPublicacion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,7 +104,7 @@ public class EstadosPublicaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "com.minicubic.infoguiaserver.model.EstadosPublicaciones[ id=" + id + " ]";
+        return "com.minicubic.infoguiaserver.model.TipoPublicacion[ id=" + id + " ]";
     }
     
 }

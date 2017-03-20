@@ -48,7 +48,7 @@ public class SucursalValoracionCab implements Serializable {
     private Float puntajeTotal;
     @JoinColumn(name = "id_cliente_sucursal", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ClienteSucursales idClienteSucursal;
+    private ClienteSucursal idClienteSucursal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCabecera", fetch = FetchType.LAZY)
     private List<SucursalValoracionDet> sucursalValoracionDetList;
 
@@ -75,11 +75,11 @@ public class SucursalValoracionCab implements Serializable {
         this.puntajeTotal = puntajeTotal;
     }
 
-    public ClienteSucursales getIdClienteSucursal() {
+    public ClienteSucursal getIdClienteSucursal() {
         return idClienteSucursal;
     }
 
-    public void setIdClienteSucursal(ClienteSucursales idClienteSucursal) {
+    public void setIdClienteSucursal(ClienteSucursal idClienteSucursal) {
         this.idClienteSucursal = idClienteSucursal;
     }
 
