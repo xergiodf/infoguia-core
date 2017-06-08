@@ -57,7 +57,7 @@ public class Cliente implements Serializable {
     @Column(name = "nombre_corto")
     private String nombreCorto;
     
-    @Column(name = "description_completa", columnDefinition = "text")
+    @Column(name = "description_completa")
     private String descriptionCompleta;
     
     @Column(name = "descripcion_corta")

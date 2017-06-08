@@ -89,11 +89,9 @@ public class ClienteDao implements Serializable{
     public List<ClienteDto> getClientes(ClienteDto clienteDto) {
         try {
             LOG.info("getClientesPorSucursal... ");
-            Query query = em.createNativeQuery("SELECT com.minicubic.infoguiacore.dto.ClientesDTO(c.id, c.nombreCompleto, "
+            return em.createQuery("SELECT com.minicubic.infoguiacore.dto.ClientesDto(c.id, c.nombreCompleto, "
                     + "c.nombreCorto, cs.nombreSucursal, cs.direccionFisica, cs.coordenadas, cs.horarios, cs.telefono "
-                    + ") FROM ClienteSucursales cs join Cliente c where c.nombre_corto like '" + clienteDto.getNombreCorto() + "%'", ClienteDto.class);
-            LOG.log(Level.INFO, "Se encontraron {0} registros", query.getResultList().size());
-            return query.getResultList();
+                    + ") FROM ClienteSucursales cs join Cliente c where c.nombre_corto like '" + clienteDto.getNombreCorto() + "%'").getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
