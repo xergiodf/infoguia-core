@@ -108,7 +108,7 @@ public class ClienteDao implements Serializable{
             Cliente cliente = converter.getCliente(clienteDto);
 
             em.getTransaction().begin();
-            em.merge(cliente);
+            cliente = em.merge(cliente);
             em.flush();
             em.getTransaction().commit();
 
@@ -119,15 +119,17 @@ public class ClienteDao implements Serializable{
         }
     }
 
-    public void deleteCliente(ClienteDto clienteDto) {
+    public void deleteCliente(Long id) {
         try {
-            Cliente cliente = converter.getCliente(clienteDto);
+            Cliente cliente = (Cliente) em.createNamedQuery("Cliente.findById")
+                    .setParameter("id", id)
+                    .getSingleResult();
 
             em.getTransaction().begin();
             em.remove(cliente);
             em.flush();
             em.getTransaction().commit();
-        } catch (IllegalAccessException | InvocationTargetException ex) {
+        } catch (Exception ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
     }

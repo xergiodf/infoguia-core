@@ -59,7 +59,7 @@ public class UsuarioDao {
             Usuario usuario = converter.getUsuario(usuarioDto);
 
             em.getTransaction().begin();
-            em.merge(usuario);
+            usuario = em.merge(usuario);
             em.flush();
             em.getTransaction().commit();
 
