@@ -107,8 +107,11 @@ public class ClienteDTO  implements Comparable<ClienteDTO>{
 
     @Override
     public int compareTo(ClienteDTO o) {
-       int compareDistance = ((ClienteDTO)o).getValorDistancia().intValue();
-       return this.valorDistancia.intValue() - compareDistance;
+        if (((ClienteDTO)o).getValorDistancia() != null) {
+            int compareDistance = ((ClienteDTO)o).getValorDistancia().intValue();
+            return (this.valorDistancia==null ? 0 : this.valorDistancia.intValue()) - compareDistance;
+        }
+        return 0;
     }
    
 }

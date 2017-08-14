@@ -131,7 +131,7 @@ public class Query {
     }
     
     public static final String getCategorias(String params){
-        String sql ="select c.* from  infoguiadb.categorias c \n" +
+        String sql ="select c.*, gc.descripcion as categoria from  infoguiadb.categorias c \n" +
                     "join infoguiadb.grupo_categorias gc \n" +
                     "on c.id_grupo_categoria = gc.id \n" +
                     "where lower(gc.descripcion) like lower('%"+params+"') \n" +

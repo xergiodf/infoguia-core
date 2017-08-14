@@ -60,12 +60,7 @@ public class ClienteDAOJDBC implements Serializable {
             String json = dbUtil.resultSetToJson(Query.getListClientesByNombreCorto(request.getData().getNombre_corto(), request.getData().getId()), null);
             lista = gson.fromJson(json, new TypeToken<List<ClienteDTO>>() {}.getType());
             lista = location.obtenerDistancia(lat, lon, lista);
-            Collections.sort(lista);
             
-            //List<HorariosDTO> horarios = new ArrayList<>();
-            //List<SucursalClientesDTO> sucursalClientesDTO = getSucursalMatriz(lista.get(0).getId());
-            //lista.get(0).setHorarios(horarios);
-            //lista.get(0).setSucursalClientes(sucursalClientesDTO);
             LOG.info("success...");
             return lista;
         } catch (Exception ex) {
@@ -131,7 +126,7 @@ public class ClienteDAOJDBC implements Serializable {
             return null;
         }
     }
-    
+
     public List<SucursalClientesDTO> getSucursales(String idCliente){
         try {
             Type listType2 = new TypeToken<Request<SucursalClientesDTO>>() {}.getType();
@@ -139,10 +134,20 @@ public class ClienteDAOJDBC implements Serializable {
             String json = dbUtil.resultSetToJson(Query.getSucursales(request.getData().getId_cliente()), null);
             List<SucursalClientesDTO> lista = gson.fromJson(json, new TypeToken<List<SucursalClientesDTO>>() {}.getType());
                         List<SucursalClientesDTO> lista2 = new ArrayList<>();
-            Double latitud = Double.parseDouble(request.getData().getCoordenadas().split("\\|")[0]);
-            Double longitud = Double.parseDouble(request.getData().getCoordenadas().split("\\|")[1]);
-            lista2 = location.obtenerDistanciaSucursales(latitud, longitud, lista);
-            Collections.sort(lista2);
+            if(request.getData().getCoordenadas().equals("")){
+                lista2 = lista;     
+            }else{
+                Double latitud = Double.parseDouble(request.getData().getCoordenadas().split("\\|")[0]);
+                Double longitud = Double.parseDouble(request.getData().getCoordenadas().split("\\|")[1]);
+                try {
+                    lista2 = location.obtenerDistanciaSucursales(latitud, longitud, lista); 
+                } catch (Exception e) {
+                    Logger.getLogger(ClienteDAOJDBC.class.getName()).log(Level.SEVERE, null, e);
+                    return lista;
+                }
+            }
+                               
+            
             return lista2;
         } catch (Exception e) {
             Logger.getLogger(ClienteDAOJDBC.class.getName()).log(Level.SEVERE, null, e);

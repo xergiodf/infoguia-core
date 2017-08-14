@@ -22,4 +22,9 @@ public class CategoriaDTO {
     @Setter
     private String descripcion;
     
+    
+    @Getter
+    @Setter
+    private String categoria;
+    
 }
